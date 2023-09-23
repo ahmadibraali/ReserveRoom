@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReserveRoom.Commands;
+using ReserveRoom.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,7 +49,7 @@ namespace ReserveRoom.ViewModels
                 OnPropertyChanged(nameof(RoomNo));
             }
         }
-        private DateTime _startDate;
+        private DateTime _startDate = new DateTime(2021,1,1);
         public DateTime StartDate
         {
             get => _startDate;
@@ -59,7 +61,7 @@ namespace ReserveRoom.ViewModels
                 OnPropertyChanged(nameof(StartDate));
             }
         }
-        private DateTime _endDate;
+        private DateTime _endDate = new DateTime(2021, 1, 8);
         public DateTime EndDate
         {
             get => _endDate;
@@ -82,9 +84,10 @@ namespace ReserveRoom.ViewModels
 
         #endregion
         #region CTOR
-        public MakeAReservationViewModel()
+        public MakeAReservationViewModel(Hotel hotel)
         {
-            
+            SubmitCommand = new MakeReservationCommand(this,hotel);
+            CancelCommand = new CancelMakeReservationCommand();
         }
         #endregion
 
